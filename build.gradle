@@ -1,0 +1,50 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+group = 're.alwyn974.fallenkingdom.bot'
+version = '1.0.0'
+archivesBaseName = 'FK-BOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+     flatDir {
+       dirs 'librairies'
+   }
+}
+dependencies {
+	compile 're.alwyn974.logger:logger:1.0.0'
+	compile 'net.dv8tion:JDA:3.8.3_463-withDependencies'
+}
+
+jar {
+	manifest {
+        attributes 'Main-Class' : 're.alwyn974.fallenkingdom.bot.FallenKingdomBOT'
+    }
+    from ('src/main/java/') {
+    exclude '**/*.java'
+    }
+    
+    from {
+    	configurations.compile.collect {
+    		it.isDirectory() ? it : zipTree(it)
+    	}
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId group
+            artifactId archivesBaseName
+            version = version
+
+            from components.java
+        }
+    }
+}
