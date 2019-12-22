@@ -22,7 +22,7 @@ import re.alwyn974.logger.LoggerFactory;
 public class FallenKingdomBOT {
 
 	private static JDA jda;
-	private static final String TOKEN = "Eh bah non sheh";
+	private static final String TOKEN = "Eh bah non cheh";
 	private static String version = "v1.0.0";
 	private static String gameActivity = "FallenKindom BOT | " + version;
 
